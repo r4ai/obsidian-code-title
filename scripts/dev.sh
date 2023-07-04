@@ -22,5 +22,6 @@ else
 fi
 
 #* Execute dev command
+pnpm dev &
 watchexec --no-vcs-ignore --exts "js,json,css" \
   cp "$root"/main.js "$root"/styles.css "$root"/manifest.json "${OUTPUT_PLUGIN_DIR}"
