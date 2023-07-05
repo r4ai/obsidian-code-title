@@ -12,7 +12,7 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
   textColor: "#CFCFCF",
   backgroundColor: "#2E2E2E",
-  roundRadius: "3em",
+  roundRadius: "0.5em",
   paddingX: 4,
 };
 
