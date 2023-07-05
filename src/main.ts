@@ -6,6 +6,7 @@ import {
 } from "./settings";
 import { AppHelper } from "./app_helper";
 import { createCommands } from "./commands";
+import { codeTitleProcessor } from "./markdown";
 
 export default class CodeTitlePlugin extends Plugin {
   settings: Settings;
@@ -18,6 +19,10 @@ export default class CodeTitlePlugin extends Plugin {
 
     createCommands(this.appHelper, this.settings).forEach((c) =>
       this.addCommand(c)
+    );
+
+    this.registerMarkdownPostProcessor((element, context) =>
+      codeTitleProcessor(element, context, this)
     );
 
     this.addSettingTab(new CodeTitleSettingTab(this.app, this));

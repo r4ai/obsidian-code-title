@@ -1,8 +1,21 @@
-/*
+.code-title {
+  padding: var(--size-4-1) var(--size-4-4);
+  width: max-content;
+  margin-right: auto;
+  background-color: var(--code-title-background-color);
+  color: var(--code-title-text-color);
+  font-family: var(--font-monospace);
+  font-size: var(--code-size);
+  border-top-left-radius: var(--code-title-round-radius);
+  border-top-right-radius: var(--code-title-round-radius);
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.markdown-preview-view pre.code-block-with-title {
+  border-top-right-radius: var(--code-title-round-radius);
+  border-bottom-left-radius: var(--code-title-round-radius);
+  border-bottom-right-radius: var(--code-title-round-radius);
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
+.markdown-preview-view pre {
+  border-radius: var(--code-title-round-radius);
+}
