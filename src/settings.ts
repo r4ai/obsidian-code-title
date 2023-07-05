@@ -6,12 +6,14 @@ export interface Settings {
   textColor: string;
   backgroundColor: string;
   roundRadius: string;
+  paddingX: number;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   textColor: "#CFCFCF",
   backgroundColor: "#2E2E2E",
   roundRadius: "3em",
+  paddingX: 4,
 };
 
 export function setCssVariablesFromSettings(
@@ -20,7 +22,11 @@ export function setCssVariablesFromSettings(
 ) {
   for (const [key, value] of Object.entries(settings)) {
     const cssKey = `--code-title-${camelToKebab(key)}`;
-    element.style.setProperty(cssKey, value);
+    if (key === "paddingX") {
+      element.style.setProperty(cssKey, `var(--size-4-${value})`);
+    } else {
+      element.style.setProperty(cssKey, value);
+    }
   }
 }
 
@@ -70,6 +76,19 @@ export class CodeTitleSettingTab extends PluginSettingTab {
           .setValue(this.plugin.settings.roundRadius)
           .onChange(async (value) => {
             this.plugin.settings.roundRadius = value;
+            await this.plugin.saveSettings();
+          })
+      );
+
+    new Setting(containerEl)
+      .setName("Code Title Padding X")
+      .setDesc("Set the x axis padding of the code block title.")
+      .addSlider((slider) =>
+        slider
+          .setValue(this.plugin.settings.paddingX)
+          .setLimits(1, 4, 1)
+          .onChange(async (value) => {
+            this.plugin.settings.paddingX = value;
             await this.plugin.saveSettings();
           })
       );

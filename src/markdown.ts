@@ -1,14 +1,9 @@
 import { MarkdownPostProcessorContext, MarkdownRenderChild } from "obsidian";
-import CodeTitlePlugin from "./main";
-import { setCssVariablesFromSettings } from "./settings";
 
 export async function codeTitleProcessor(
   element: HTMLElement,
-  context: MarkdownPostProcessorContext,
-  plugin: CodeTitlePlugin
+  context: MarkdownPostProcessorContext
 ) {
-  setCssVariablesFromSettings(document.body, plugin.settings);
-
   const codeBlocks = element.querySelectorAll("pre");
   codeBlocks.forEach((codeBlock) => {
     // e.g. "language-rust:hoge/main.rs"

@@ -3,6 +3,7 @@ import {
   DEFAULT_SETTINGS,
   type Settings,
   CodeTitleSettingTab,
+  setCssVariablesFromSettings,
 } from "./settings";
 import { codeTitleProcessor } from "./markdown";
 
@@ -14,7 +15,7 @@ export default class CodeTitlePlugin extends Plugin {
     this.init();
 
     this.registerMarkdownPostProcessor((element, context) =>
-      codeTitleProcessor(element, context, this)
+      codeTitleProcessor(element, context)
     );
 
     this.addSettingTab(new CodeTitleSettingTab(this.app, this));
@@ -30,6 +31,7 @@ export default class CodeTitlePlugin extends Plugin {
 
   async saveSettings() {
     await this.saveData(this.settings);
+    setCssVariablesFromSettings(document.body, this.settings);
     this.init();
   }
 }
