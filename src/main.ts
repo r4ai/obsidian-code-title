@@ -12,6 +12,7 @@ export default class CodeTitlePlugin extends Plugin {
 
   async onload() {
     await this.loadSettings();
+    setCssVariablesFromSettings(document.body, this.settings);
     this.init();
 
     this.registerMarkdownPostProcessor((element, context) =>
