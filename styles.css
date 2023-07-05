@@ -11,6 +11,7 @@
 }
 
 .markdown-preview-view pre.code-block-with-title {
+  border-top-left-radius: 0;
   border-top-right-radius: var(--code-title-round-radius);
   border-bottom-left-radius: var(--code-title-round-radius);
   border-bottom-right-radius: var(--code-title-round-radius);
