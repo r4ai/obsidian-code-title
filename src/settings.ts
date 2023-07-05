@@ -5,14 +5,12 @@ import { camelToKebab } from "./utils";
 export interface Settings {
   textColor: string;
   backgroundColor: string;
-  isRound: boolean;
   roundRadius: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   textColor: "#CFCFCF",
   backgroundColor: "#2E2E2E",
-  isRound: true,
   roundRadius: "3em",
 };
 
@@ -64,28 +62,14 @@ export class CodeTitleSettingTab extends PluginSettingTab {
           })
       );
 
-    const roundRadius = new Setting(containerEl)
+    new Setting(containerEl)
       .setName("Code Title Round Radius")
       .setDesc("Set the round radius of the code block title. e.g. 1em, 6px")
-      .setDisabled(!this.plugin.settings.isRound)
       .addText((text) =>
         text
           .setValue(this.plugin.settings.roundRadius)
           .onChange(async (value) => {
             this.plugin.settings.roundRadius = value;
-            await this.plugin.saveSettings();
-          })
-      );
-
-    new Setting(containerEl)
-      .setName("Code Title Round")
-      .setDesc("Set should the code block title be rounded.")
-      .addToggle((toggle) =>
-        toggle
-          .setValue(this.plugin.settings.isRound)
-          .onChange(async (value) => {
-            this.plugin.settings.isRound = value;
-            roundRadius.setDisabled(!value);
             await this.plugin.saveSettings();
           })
       );

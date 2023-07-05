@@ -23,9 +23,7 @@ export async function codeTitleProcessor(
     const title = text?.split(":")[1];
 
     if (language && title) {
-      context.addChild(
-        new CodeTitle(element, language, title, plugin.settings.isRound)
-      );
+      context.addChild(new CodeTitle(element, language, title));
     }
   });
 }
@@ -35,20 +33,13 @@ export class CodeTitle extends MarkdownRenderChild {
   language: string;
   containerEl: HTMLElement;
   margin: string;
-  isRound: boolean;
 
-  constructor(
-    containerEl: HTMLElement,
-    language: string,
-    title: string,
-    isRound: boolean
-  ) {
+  constructor(containerEl: HTMLElement, language: string, title: string) {
     super(containerEl);
     this.language = language;
     this.title = title;
     const preEl = document.getElementsByTagName("pre")[0];
     this.margin = window.getComputedStyle(preEl).getPropertyValue("margin-top");
-    this.isRound = isRound;
   }
 
   onload() {
